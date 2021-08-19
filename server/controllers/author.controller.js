@@ -13,7 +13,17 @@ module.exports.allAuthors = (req, res) => {
     });
 };
 // create author
-
+module.exports.create = (req, res) => {
+  Author.create(req.body)
+    .then((newAuthor) => {
+      console.log(newAuthor);
+      res.json(newAuthor);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(400).json(err);
+    });
+};
 // get one author
 
 // edit author
