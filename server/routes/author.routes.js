@@ -13,4 +13,5 @@ module.exports = (app) => {
   //update
   app.put("/api/authors/:id", AuthorController.update);
   //delete
+  app.delete("/api/authors/:id", AuthorController.delete);
 };

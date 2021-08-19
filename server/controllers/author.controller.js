@@ -52,4 +52,15 @@ module.exports.update = (req, res) => {
       res.status(400).json(err);
     });
 };
-// delelte author
+// delete author
+module.exports.delete = (req, res) => {
+  Author.findByIdAndDelete(req.params.id)
+    .then((deletedAuthor) => {
+      console.log(deletedAuthor);
+      res.json(deletedAuthor);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(400).json(err);
+    });
+};
