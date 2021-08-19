@@ -1,5 +1,6 @@
 //require model
 const Author = require("../models/author.model");
+const authorRoutes = require("../routes/author.routes");
 // all authors
 module.exports.allAuthors = (req, res) => {
   Author.find()
@@ -25,7 +26,30 @@ module.exports.create = (req, res) => {
     });
 };
 // get one author
-
+module.exports.getOne = (req, res) => {
+  Author.findById(req.params.id)
+    .then((oneAuthor) => {
+      console.log(oneAuthor);
+      res.json(oneAuthor);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(400).json(err);
+    });
+};
 // edit author
-
+module.exports.update = (req, res) => {
+  Author.findByIdAndUpdate({ _id: req.params.id }, req.body, {
+    new: true, //return updated obj
+    runValidators: true, //use the same validation that was used at creation
+  })
+    .then((updatedAuthor) => {
+      console.log(updatedAuthor);
+      res.json(updatedAuthor);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(400).json(err);
+    });
+};
 // delelte author

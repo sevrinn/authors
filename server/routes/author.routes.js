@@ -9,8 +9,8 @@ module.exports = (app) => {
   //create
   app.post("/api/authors", AuthorController.create);
   //get one
-
+  app.get("/api/authors/:id", AuthorController.getOne);
   //update
-
+  app.put("/api/authors/:id", AuthorController.update);
   //delete
 };
