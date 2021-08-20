@@ -5,11 +5,12 @@ import Create from "./components/Create";
 import Details from "./components/Details";
 import Update from "./components/Update";
 import Delete from "./components/Delete";
+import Header from "./components/Header";
 
 function App() {
   return (
     <div className="App">
-      <h1>Author App</h1>
+      <Header />
       <Router>
         <AllAuthors default path="/authors" />
         <Create path="/authors/new" />

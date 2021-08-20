@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, navigate } from "@reach/router";
 import Header from "./Header";
+import Delete from "./Delete";
 
 const AllAuthors = (props) => {
   const [allAuthors, setAllAuthors] = useState([]);
@@ -17,7 +18,15 @@ const AllAuthors = (props) => {
         console.log("there was an error", err);
       });
   }, []);
-
+  //remove author obj from array after it is successfully deleted from mongoDB server
+  const afterDelete = (deletedAuthorId) => {
+    let filteredAuthorArray = allAuthors.filter((authorObj) => {
+      //if return true, obj becomes part of new array
+      //if false, obj is skipped in new array
+      return authorObj._id !== deletedAuthorId;
+    });
+    setAllAuthors(filteredAuthorArray);
+  };
   return (
     <div>
       <Link to={"/authors/new"}>Add an author</Link>
@@ -38,7 +47,7 @@ const AllAuthors = (props) => {
                   <Link to={"/authors/" + author._id}>
                     <button>Edit</button>
                   </Link>
-                  <button>Delete</button>
+                  <Delete authorId={author._id} afterDelete={afterDelete} />
                 </td>
               </tr>
             );
