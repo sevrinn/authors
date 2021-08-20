@@ -21,7 +21,7 @@ const Delete = (props) => {
   };
   return (
     <button className="delete-btn" onClick={(e) => deleteHandler()}>
-      <h2>Delete</h2>
+      Delete
     </button>
   );
 };
